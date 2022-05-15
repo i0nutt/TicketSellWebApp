@@ -1,0 +1,26 @@
+﻿@inject TicketSellWebApp.Services.ICookieService cookie
+@{ var user = cookie.GetCookie<User>(Context.Request,"User");}
+
+    @if(user != null)
+    @if (user.jobType == 0)
+    {
+        <p>Operator</p>
+    }
+    else
+    {
+        <p>Admin</p>
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Users" asp-action="GetUserList">Manage Users</a>
+        </div>
+        <div class="container">
+     
+        </div>
+    }
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

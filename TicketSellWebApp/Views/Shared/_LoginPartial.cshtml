@@ -1,0 +1,19 @@
+﻿@inject TicketSellWebApp.Services.ICookieService cookie
+@{ var user = cookie.GetCookie<User>(Context.Request, "User");}
+<ul class="navbar-nav">
+    @if (user == null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <p> Logged in as @user.Username</p>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Log out</a>
+        </li>
+    }
+</ul>

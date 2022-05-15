@@ -1,0 +1,48 @@
+﻿@model TicketSellWebApp.Models.Show
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Show</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cast)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cast)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Actors)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Actors)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PremierDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PremierDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfTickets)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfTickets)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
