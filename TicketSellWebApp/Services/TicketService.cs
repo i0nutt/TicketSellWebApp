@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicketSellWebApp.Models;
+using TicketSellWebApp.Repositories;
 using TicketSellWebApp.Repositories.cs;
 
 namespace TicketSellWebApp.Services
@@ -15,7 +16,10 @@ namespace TicketSellWebApp.Services
             }
             public bool Create(Ticket ticket)
             {
-                return _iRepositoryClass.Create(ticket).Result;
+                if (ValidateCreate(ticket))
+                    return _iRepositoryClass.Create(ticket).Result;
+                else
+                    return false;
             }
             public bool Edit(int id, Ticket ticket)
             {
@@ -35,15 +39,25 @@ namespace TicketSellWebApp.Services
             {
                 return _iRepositoryClass.Delete(id).Result;
             }
-            public void dummy()
+            
+            private bool ValidateCreate(Ticket T)
             {
-
+                if(_iRepositoryClass.countByInfo(T.ShowNumber).Result <
+                _iShowRepositoryClass.FindById(T.ShowNumber).Result.NumberOfTickets)
+                {
+                    if (_iRepositoryClass.findCopy(T).Result == null)
+                        return true;
+                    else
+                        return false;
+                }
+                return false;
             }
-
-            public TicketService(IRepository<Ticket> userRepository)
+            public TicketService(ITicketRepository<Ticket> userRepository, IRepository<Show> _iShowRepositoryClass)
             {
                 this._iRepositoryClass = userRepository;
+                this._iShowRepositoryClass = _iShowRepositoryClass;
             }
-            private readonly IRepository<Ticket> _iRepositoryClass;
-        }
+            private readonly ITicketRepository<Ticket> _iRepositoryClass;
+        private readonly IRepository<Show> _iShowRepositoryClass;
+    }
 }

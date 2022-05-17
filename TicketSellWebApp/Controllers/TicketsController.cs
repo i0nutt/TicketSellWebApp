@@ -16,9 +16,12 @@ namespace TicketSellWebApp.Controllers
         // GET: Tickets
         public IActionResult Index()
         {
+            return RedirectToAction("UserLoggedIn","Login");
+        }
+        public IActionResult GetTicketList()
+        {
             return View(_iServiceClass.GetList());
         }
-
         // GET: Tickets/Details/5
         public IActionResult Details(int? id)
         {

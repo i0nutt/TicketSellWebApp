@@ -16,7 +16,7 @@ namespace TicketSellWebApp.Controllers
         // GET: Shows
         public IActionResult Index()
         {
-            return NotFound();
+            return RedirectToAction("GetShowList", "Show");
         }
         public IActionResult GetShowList()
         {

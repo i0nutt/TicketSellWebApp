@@ -17,8 +17,14 @@ namespace TicketSellWebApp.Controllers
 
         public IActionResult Index()
         {
-            return NotFound();
+            return RedirectToAction("GetUserList","User");
         }
+
+        private IActionResult RedirectView(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         public IActionResult GetUserList()
         {
             return View("GetUserList", _iServiceClass.GetList());

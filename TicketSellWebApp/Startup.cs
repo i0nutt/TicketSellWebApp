@@ -13,6 +13,7 @@ using TicketSellWebApp.Data;
 using TicketSellWebApp.Models;
 using TicketSellWebApp.Repositories.cs;
 using TicketSellWebApp.Services;
+using TicketSellWebApp.Repositories;
 
 namespace TicketSellWebApp
 {
@@ -78,7 +79,7 @@ namespace TicketSellWebApp
         {
             // repository    
             services.AddScoped<IRepository<User>, UserRepository>();
-            services.AddScoped<IRepository<Ticket>, TicketRepository>();
+            services.AddScoped<ITicketRepository<Ticket>, TicketRepository>();
             services.AddScoped<IRepository<Show>, ShowRepository>();
             //services
             services.AddScoped<IService<User>, UserService>();

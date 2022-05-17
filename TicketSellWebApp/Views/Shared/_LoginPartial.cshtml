@@ -15,5 +15,29 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Log out</a>
         </li>
+        @if (user.jobType == 1)
+        {
+            <li class="nav-item">
+                <a class="navbar-brand" asp-area="" asp-controller="Users" asp-action="GetUserList">Manage Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" asp-area="" asp-controller="Shows" asp-action="GetShowList">Manage Shows</a>
+            </li>
+        }
+        @if (user.jobType == 0)
+        {
+            <li class="nav-item">
+                <a class="navbar-brand" asp-area="" asp-controller="Tickets" asp-action="Create">Add Ticket</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" asp-area="" asp-controller="Shows" asp-action="GetShowList">See Shows</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" asp-area="" asp-controller="Tickets" asp-action="GetTicketList">See Ticket List</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-brand" asp-area="" asp-controller="Tickets" asp-action="GenerateSoldTicketsFile">Generate Sold Items File</a>
+            </li>
+        }
     }
 </ul>

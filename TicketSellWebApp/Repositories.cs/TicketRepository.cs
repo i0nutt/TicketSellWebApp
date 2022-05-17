@@ -8,7 +8,7 @@ using TicketSellWebApp.Models;
 
 namespace TicketSellWebApp.Repositories.cs
 {
-    public class TicketRepository : IRepository<Ticket>
+    public class TicketRepository : ITicketRepository<Ticket>
     {
         public async Task<bool> Create(Ticket t)
         {
@@ -58,17 +58,26 @@ namespace TicketSellWebApp.Repositories.cs
             return await _context.Ticket
               .FirstOrDefaultAsync(m => m.Id == id);
         }
-
-        public async Task<Ticket> findByInfo(Ticket t)
+        public async Task<Ticket> findCopy(Ticket t)
         {
             return await _context.Ticket
             .FirstOrDefaultAsync(m => m.RowNumber == t.RowNumber && m.ColumnNumber == t.ColumnNumber
                                       && m.Id != t.Id);
         }
+        public async Task<int> countByInfo(int showNumber)
+        {
+            return await _context.Ticket
+            .CountAsync(m => m.ShowNumber == showNumber);
+        }
 
         public async Task<List<Ticket>> GetList()
         {
             return await _context.Ticket.ToListAsync();
+        }
+
+        public Task<Ticket> findByInfo(Ticket t)
+        {
+            throw new NotImplementedException();
         }
 
         public TicketRepository(UserContext context)
