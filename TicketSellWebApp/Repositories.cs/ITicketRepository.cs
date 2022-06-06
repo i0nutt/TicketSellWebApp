@@ -10,5 +10,6 @@ namespace TicketSellWebApp.Repositories
     {
         public Task<int> countByInfo(int num);
         public Task<T> findCopy(T t);
+        public Task<List<T>> FindByInfo1(T t);
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TicketSellWebApp.Data;
+using TicketSellWebApp.Exporter;
 using TicketSellWebApp.Models;
 using TicketSellWebApp.Services;
 
@@ -122,10 +123,17 @@ namespace TicketSellWebApp.Controllers
             _iServiceClass.Delete(id);
             return RedirectToAction(nameof(Index));
         }
-        public TicketsController(IService<Ticket> iserviceClass)
+        [HttpGet, ActionName("GenerateSoldTicketsFile")]
+        public IActionResult GenerateSoldTicketsFile(String format)
+        {
+            //format = "pdf";
+            IExporter myExporter = ExporterFactory.GenerateExporter(format);
+            return myExporter.GetFile(_iServiceClass.GetList());
+        }
+        public TicketsController(ITicketService<Ticket> iserviceClass)
         {
             this._iServiceClass = iserviceClass;
         }
-        private readonly IService<Ticket> _iServiceClass;
+        private readonly ITicketService<Ticket> _iServiceClass;
     }
 }

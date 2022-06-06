@@ -17,7 +17,7 @@ namespace TicketSellWebApp.Repositories.cs
                 _context.Add(t);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
@@ -73,6 +73,11 @@ namespace TicketSellWebApp.Repositories.cs
         public async Task<List<Ticket>> GetList()
         {
             return await _context.Ticket.ToListAsync();
+        }
+
+        public async Task<List<Ticket>> FindByInfo1(Ticket t)
+        {
+            return await _context.Ticket.Where(m => m.ShowNumber == t.ShowNumber).ToListAsync();
         }
 
         public Task<Ticket> findByInfo(Ticket t)

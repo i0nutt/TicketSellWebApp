@@ -1,20 +1,25 @@
 ﻿@inject TicketSellWebApp.Services.ICookieService cookie
-@{ var user = cookie.GetCookie<User>(Context.Request,"User");}
+@{ var user = cookie.GetCookie<User>(Context.Request, "User");}
 
-    @if(user != null)
+@if (user != null)
     @if (user.jobType == 0)
     {
         <p>Operator</p>
+        <div>
+            @Html.ActionLink("Generate Sold Tickets File CSV", "GenerateSoldTicketsFile", "Tickets", new { format = "csv" }, null) |
+            @Html.ActionLink("Generate Sold Tickets File JSON", "GenerateSoldTicketsFile", "Tickets", new { format = "json" }, null) |
+            @Html.ActionLink("Generate Sold Tickets File PDF", "GenerateSoldTicketsFile", "Tickets", new { format = "pdf" }, null)
+        </div>
     }
     else
     {
         <p>Admin</p>
     }
-    <div>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        <a asp-action="Index">Back to List</a>
-    </div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

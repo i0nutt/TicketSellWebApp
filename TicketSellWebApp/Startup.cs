@@ -14,6 +14,8 @@ using TicketSellWebApp.Models;
 using TicketSellWebApp.Repositories.cs;
 using TicketSellWebApp.Services;
 using TicketSellWebApp.Repositories;
+using TicketSellWebApp.Controllers;
+using TicketSellWebApp.Middleware;
 
 namespace TicketSellWebApp
 {
@@ -60,6 +62,8 @@ namespace TicketSellWebApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseMiddleware<ApiKeyMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -83,7 +87,7 @@ namespace TicketSellWebApp
             services.AddScoped<IRepository<Show>, ShowRepository>();
             //services
             services.AddScoped<IService<User>, UserService>();
-            services.AddScoped<IService<Ticket>, TicketService>();
+            services.AddScoped<ITicketService<Ticket>, TicketService>();
             services.AddScoped<IService<Show>, ShowService>();
             services.AddScoped<ICookieService, CookieService>();
             //services.AddScoped<IMasterMenuProvider, MasterMenuProvider>();

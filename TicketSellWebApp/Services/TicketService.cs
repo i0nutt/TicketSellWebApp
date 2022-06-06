@@ -8,7 +8,7 @@ using TicketSellWebApp.Repositories.cs;
 
 namespace TicketSellWebApp.Services
     {
-        public class TicketService : IService<Ticket>
+        public class TicketService : ITicketService<Ticket>
         {
             public List<Ticket> GetList()
             {
@@ -33,6 +33,12 @@ namespace TicketSellWebApp.Services
             public Ticket FindByInfo(Ticket ticket)
             {
                 return _iRepositoryClass.findByInfo(ticket).Result;
+            }
+            public List<Ticket> FindByShow(int ShowNumber)
+            {
+                Ticket t = new Ticket();
+                t.ShowNumber = ShowNumber;
+                return _iRepositoryClass.FindByInfo1(t).Result;
             }
 
             public bool Delete(int id)
